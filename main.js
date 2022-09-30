@@ -35,33 +35,35 @@ function createProduct(createName, createPirce, createImg, type) {
     var a = new Product(createName, createPirce, createImg, type)
     dataProduct.push(a)
 }
+// hàm chạy card HTML 
+function stringHtml(i) {
+    let string = `<div class="col">
+        <div class="card shadow-sm">
+        <img src="${dataProduct[i].getImg()}" style="height: 150px;" alt="">
+        <div class="card-body">
+            <p class="card-text">${dataProduct[i].getName()}</p>
+            <div class="d-flex justify-content-between align-items-center">
+            <div style="display: flex; justify-content: space-between; width: 100%;" class="btn-group">
+                <div><small>${dataProduct[i].getPrice()/1000000}.000.000 .đ</small></div>
+                <div style="text-align: right">
+                <button onclick="buy(${i})" type="button" class="btn btn-sm btn-outline-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                </svg></button>
+                <button onclick="addCart(${i})" type="button" class="btn btn-sm btn-outline-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket3" viewBox="0 0 16 16">
+                    <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6h-9.21z"/>
+                </svg></button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>`
+    return string
+}
 // hàm chạy display sản phẩm
 function getProduct() {
     let string = ''
-    function stringHtml(i) {
-        let string = `<div class="col">
-            <div class="card shadow-sm">
-            <img src="${dataProduct[i].getImg()}" style="height: 150px;" alt="">
-            <div class="card-body">
-                <p class="card-text">${dataProduct[i].getName()}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                <div style="display: flex; justify-content: space-between; width: 100%;" class="btn-group">
-                    <div><small>${dataProduct[i].getPrice()/1000000}.000.000 .đ</small></div>
-                    <div style="text-align: right">
-                    <button onclick="buy(${i})" type="button" class="btn btn-sm btn-outline-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-                        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-                    </svg></button>
-                    <button onclick="addCart(${i})" type="button" class="btn btn-sm btn-outline-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket3" viewBox="0 0 16 16">
-                        <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6h-9.21z"/>
-                    </svg></button>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-        </div>`
-        return string
-    }
+
     for (let i = 0; i < dataProduct.length; i++){
         string+= stringHtml(i)
     }
@@ -79,7 +81,8 @@ function addCart(index) {
     resetRedDotOfListCart()
 }
 // chạy display liscart
-function listCart(id, primary) {
+function listCart() {
+    totalPrice()
     if (user.cart == 0){
         document.getElementById('listCart').innerHTML = ''
         return
@@ -111,7 +114,42 @@ function listCart(id, primary) {
         for (let i = 0 ; i < user.cart.length ; i ++){
             totalPrice += user.cart[i].price/1000000
         }
-        document.getElementById('totalCart').innerHTML = 'Tổng' + totalPrice + '.000.000 đ'
+        if (user.cart.length == 0){
+            document.getElementById('totalCart').innerHTML = ''
+
+        }else{
+            document.getElementById('totalCart').innerHTML = 'Tổng' + totalPrice + '.000.000 đ'
+ 
+        }
+        
+    }
+    
+}
+function listBuy() {
+    if (user.buy == 0){
+        document.getElementById('listBuy').innerHTML = ''
+        return
+    }
+    let string = ''
+    function stringHtml(name_, price_, img_,index) {
+        let string = `      
+        <div class="cardProduct">
+        <img src="${img_}" style="width: 100px; height: 100%;" alt="">
+        <div style="padding: 20px;">${name_} <br>${price_} </div>
+        </div>`
+        return string
+    }
+    for ( var i = 0 ; i < user.buy.length; i++){
+        string += stringHtml(user.buy[i].name, user.buy[i].price, user.buy[i].img,i)
+    }
+    document.getElementById('listBuy').innerHTML = string
+
+    function totalPrice() {
+        let totalPrice = 0
+        for (let i = 0 ; i < user.buy.length ; i ++){
+            totalPrice += user.buy[i].price/1000000
+        }
+        document.getElementById('totalBuy').innerHTML = 'Tổng' + totalPrice + '.000.000 đ'
         
     }
     totalPrice()
@@ -154,6 +192,7 @@ function signOut() {
         loadPage()
 
     }
+    pushJson()
 }
 // set product
 function setProduct(){
@@ -165,7 +204,7 @@ function setProduct(){
         createProduct(`Pc Product 1.${i}`,randomPrice(), `img/pc${i}.jpg`,'pc')
     }
     for (let i = 0 ; i < 10; i ++){
-        createProduct(`Laptop Product 1.${i}`,randomPrice(), `img/laptop${i}.jpg`,'pc')
+        createProduct(`Laptop Product 1.${i}`,randomPrice(), `img/laptop${i}.jpg`,'laptop')
     }
 
 }
@@ -177,9 +216,35 @@ function buyInCart() {
         }
     }
     inputBuy()
+    user.cart = []
+    resetRedDotOfListCart()
     console.log(user.buy);
 }
-// display Buy
+function setNameAccout() {
+    document.getElementById('nameAccout').innerText = user.name
+}
+// lọc sản phẩm pc
+function productChoice(choice) {
+    console.log(choice);
+    let string = ''
+    for (let i = 0; i < dataProduct.length; i++) {
+        if (dataProduct[i].type == choice ){
+            string += stringHtml(i)
+        }
+        
+    }
+    document.getElementById('product').innerHTML = string
+}
+function seachProduct(text) {
+    let string = ''
+    for (let i = 0; i < dataProduct.length; i++) {
+        if (dataProduct[i].name.indexOf(text)!=-1){
+            string += stringHtml(i)
+        }
+        
+    }
+    document.getElementById('product').innerHTML = string
+}
 
 
 //----------------------------Khai bao---------------------------------------------//
@@ -189,6 +254,7 @@ var user;
 var indexAccout;
 //-----------------------------Main----------------------------------------------//
 function loadPage() {
+
     pullJson()
     indexAccout = JSON.parse(localStorage.getItem("indexAccout"))
     console.log("loadPage ~ indexAccout", indexAccout)
@@ -201,6 +267,7 @@ function loadPage() {
     dataProduct = []
     setProduct()
     getProduct() 
+    setNameAccout()
 }
 // --------------------------------SignIn---------------------------------------------
 // Class---------------
@@ -253,6 +320,15 @@ function pullJson() {
     dataAccout = JSON.parse(localStorage.getItem("dataAccout"))
     dataProduct = JSON.parse(localStorage.getItem("dataProduct"))
 }
+function firtRun() {
+    let nowJson = JSON.parse(localStorage.getItem("dataAccout"))
+    if (nowJson == null){
+        localStorage.setItem("dataAccout", JSON.stringify([]))
+    }else{
+        pullJson()
+    }
+    
+}
 // check accout, true back index, false back  -1
 function checkAccout(id, password) {
     let flag = false
@@ -283,12 +359,14 @@ function createAdminAndUserAccout() {
 
 // Main
 function mainSignin() {
-    pullJson()
-    if ((dataAccout.length == null) ||(dataAccout.length == undefined)){
+    firtRun()
+    console.log(dataAccout);
+    if ((dataAccout.length == 0)){
         createAdminAndUserAccout()
+        pushJson()
     }
     console.log(dataAccout[0].name);
-    pullJson()
+
 }
 
 

@@ -21,14 +21,14 @@
             </a>
             <!-- list tab -->
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="#" class="nav-link px-2 link-secondary">Hai Ninh PC</a></li>
+              <li><a id="nameAccout" href="#" class="nav-link px-2 link-secondary">Hai Ninh PC</a></li>
               <li><a href="#" class="nav-link px-2 link-dark">Empty</a></li>
               <li><a href="#" class="nav-link px-2 link-dark">Empty</a></li>
               <li><a href="#" class="nav-link px-2 link-dark">Empty</a></li>
             </ul>
             <!-- tìm kiếm -->
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-              <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+              <input oninput="seachProduct(this.value)" type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
             
             
@@ -77,17 +77,10 @@
 
             
 
-            <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#buyModal" onclick="listCart()">
-
-              <span id="numberBuyRedDot" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" hidden>
-                <!-- number buy(red - dot) -->
-                
-                <span class="visually-hidden">unread messages</span>
-              </span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket3" viewBox="0 0 16 16">
-                <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6h-9.21z"></path>
-              </svg>
-                Đã mua
+            <button style='margin-left: 10px;' type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#buyModal" onclick="listBuy()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+              </svg>                Đã mua
             </button>
             <!-- Modal -->
               <!-- Modal -->
@@ -104,7 +97,7 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <p style="margin-right: 100px" id="totalCart"></p>
+                      <p style="margin-right: 100px" id="totalBuy"></p>
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                     </div>
                   </div>
@@ -126,26 +119,14 @@
                       <span class="fs-5 fw-semibold">Danh mục</span>
                     <ul class="list-unstyled ps-0">
                       <li class="mb-1">
-                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                          Laptop
-                        </button>
-                        <div class="collapse show" id="home-collapse">
-                          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Gaming</a></li>
-                            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Văn Phòng</a></li>
-                            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Cũ</a></li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li class="mb-1">
                         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                          Máy tính bàn
+                          Máy tính
                         </button>
                         <div class="collapse" id="dashboard-collapse">
                           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Gaming</a></li>
-                            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Văn Phòng</a></li>
-                            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Cũ</a></li>
+                            <li><a onclick="productChoice('laptop')" href="#" class="link-dark d-inline-flex text-decoration-none rounded">Laptop</a></li>
+                            <li><a onclick="productChoice('pc')" href="#" class="link-dark d-inline-flex text-decoration-none rounded">PC</a></li>
+                            <li><a onclick="getProduct()" href="#" class="link-dark d-inline-flex text-decoration-none rounded">Tất cả</a></li>
                           </ul>
                         </div>
                       </li>
